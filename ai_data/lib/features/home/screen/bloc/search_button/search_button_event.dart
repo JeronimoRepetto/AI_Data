@@ -26,6 +26,11 @@ class OnSetPrompt extends SearchButtonEvent {
   OnSetPrompt(this.prompt);
 }
 
-class OnDone extends SearchButtonEvent {}
+class OnDone extends SearchButtonEvent {
+  final String content;
+  OnDone(this.content);
+}
+
+class OnHaveResult extends SearchButtonEvent {}
 
 class OnError extends SearchButtonEvent {}

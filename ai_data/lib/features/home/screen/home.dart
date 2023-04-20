@@ -5,11 +5,8 @@ import 'package:ai_data/core/app/styles/app_font_size.dart';
 import 'package:ai_data/core/app/styles/app_gradients.dart';
 import 'package:ai_data/core/app/styles/app_space.dart';
 import 'package:ai_data/core/app/styles/app_text_style.dart';
-import 'package:ai_data/core/lang/l10n.dart';
 import 'package:ai_data/core/routing/app_routing.dart';
 import 'package:ai_data/features/home/screen/bloc/data_to_search/data_to_search_bloc.dart';
-import 'package:ai_data/features/home/screen/bloc/languages_bloc/languages_bloc.dart';
-import 'package:ai_data/features/home/screen/bloc/location_section/location_section_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/rank_dropdown/dropdown_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/search_button/search_button_bloc.dart';
 import 'package:ai_data/widgets/custom_alert_dialog.dart';
@@ -19,9 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'parts_of_screen/rank_dropdown.dart';
 part 'parts_of_screen/data_to_search.dart';
-part 'parts_of_screen/language_section.dart';
 part 'parts_of_screen/search_button.dart';
-part 'parts_of_screen/location_section.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -38,9 +33,6 @@ class HomeScreen extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => locator<SearchButtonBloc>()..init(),
-        ),
-        BlocProvider(
-          create: (context) => locator<LocationSectionBloc>(),
         ),
       ],
       child: Scaffold(
@@ -66,11 +58,12 @@ class HomeScreen extends StatelessWidget {
                 break;
               case OnDone:
                 Navigator.pop(context);
-                //goRouter.pushNamed('ranking');
+                break;
+              case OnHaveResult:
+                goRouter.pushNamed('ranking', extra: state.result);
                 break;
               case OnError:
                 Navigator.pop(context);
-
                 break;
               default:
                 break;
@@ -79,7 +72,6 @@ class HomeScreen extends StatelessWidget {
           child: Stack(
             children: [
               const _HomeForm(),
-              _LanguageSection(),
               _SearchButton(),
             ],
           ),
@@ -142,5 +134,12 @@ class _TopAndNumberSection extends StatelessWidget {
         const _RankDropdown(),
       ],
     );
+  }
+}
+
+class _LocationSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text('home.inBarcelona'.tr(), style: AppTextStyle.brandStyle);
   }
 }

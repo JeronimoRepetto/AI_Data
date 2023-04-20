@@ -1,7 +1,7 @@
 {
-    "home":{
+    "home" : {
         "top" : "TOP",
-        "inTheWorld" : "el Mundo",
+        "inBarcelona" : "En Barcelona",
         "search" : "Buscar",
         "loading" : "Cargando...",
         "popup" : {
@@ -10,8 +10,6 @@
         } 
     },
     "prompt" : {
-        "top" : "Top",
-        "in" : "en",
-        "basicPrompt": "Quiero que actues como una tabla de rankings. En esta tabla se veran los ganadores del ranking. iniciando desde el 1mer puesto hasta el ultimo que se solicite. EJ: Te pedire los 10 mejores bares en Madrid. Y me los daras de la siguiente manera: name: NOMBRE DEL BAR, luego haras un salto de linea y continuaras con info: UNA BREVE DESCRIPCION DEL BAR."
+        "basicPrompt": "Actua como una tabla de rankings que daria un guia turistico. Te pedire un ranking de diferentes cosas y debes darme, ademas de los nombres de los ganadores del ranking, una leve informacion de cada uno. El formato debe ser NOMBRE DE GANADOR: INFORMACION. Dime el top {number} de los mejores {data} de Barcelona"
     }
 }

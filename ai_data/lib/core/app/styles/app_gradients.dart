@@ -12,4 +12,14 @@ class AppGradients {
     ], // red to yellow
     tileMode: TileMode.repeated, // repeats the gradient over the canvas
   );
+  static const LinearGradient rankingColorGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment(0.0, 1.0), // 10% of the width, so there are ten blinds.
+    colors: <Color>[
+      AppColors.terciaryGradient,
+      AppColors.secondaryGradient,
+      AppColors.primaryGradient,
+    ], // red to yellow
+    tileMode: TileMode.repeated, // repeats the gradient over the canvas
+  );
 }

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:ai_data/core/app/constants/endpoints.dart';
 import 'package:ai_data/core/app/http_service/http_service.dart';
 import 'package:ai_data/core/exceptions/middleware.dart';
-import 'package:ai_data/features/home/data/model/data_search_model.dart';
+import 'package:ai_data/features/home/data/dto/response_gpt_dto.dart';
 import 'package:ai_data/core/exceptions/base_exceptions.dart';
 import 'package:ai_data/features/home/data/repository/gpt_repository.dart';
 import 'package:dartz/dartz.dart';
@@ -12,7 +12,7 @@ class GptApi extends GptRepository {
   final HttpService _httpService;
   GptApi({required HttpService httpService}) : _httpService = httpService;
   @override
-  Future<Either<BaseException, List<DataSearch>>> getRanking(
+  Future<Either<BaseException, ResponseGptDTO>> getRanking(
       String prompt) async {
     try {
       final bodyRequest = {
@@ -31,8 +31,7 @@ class GptApi extends GptRepository {
         body: bodyRequest,
       );
       resp.checkStatusCode();
-      var bodyResponse = jsonDecode(resp.data);
-      List<DataSearch> result = [];
+      ResponseGptDTO result = ResponseGptDTO.fromJson(resp.data);
       return Right(result);
     } catch (e) {
       return Left(BaseException(message: e.toString()));

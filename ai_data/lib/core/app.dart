@@ -1,30 +1,16 @@
-import 'package:ai_data/core/app/service_locator/service_locator.dart';
-import 'package:ai_data/core/app/storage/local_storage.dart';
 import 'package:ai_data/core/app/styles/app_themes.dart';
 import 'package:ai_data/core/app/utils/life_cycle_manager.dart';
 import 'package:ai_data/core/routing/app_routing.dart';
-import 'package:ai_data/features/home/screen/bloc/languages_bloc/languages_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => locator<LanguagesBloc>()
-            ..setLanguage(
-              locator<LocalStorageService>().getLocale().toUpperCase(),
-            ),
-        ),
-      ],
-      child: const LifeCycleManager(
-        child: AppWithTheme(),
-      ),
+    return const LifeCycleManager(
+      child: AppWithTheme(),
     );
   }
 }

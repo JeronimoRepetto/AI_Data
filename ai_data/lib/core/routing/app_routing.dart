@@ -20,7 +20,7 @@ final GoRouter goRouter = GoRouter(
           GoRoute(
             path: AppRoute.ranking.name,
             name: AppRoute.ranking.name,
-            builder: (context, state) => Ranking(),
+            builder: (context, state) => Ranking(result: state.extra as String),
           )
         ]),
   ],

@@ -79,6 +79,18 @@ class SearchButtonBloc extends Bloc<SearchButtonEvent, SearchButtonState> {
         emit(
           state.copyWith(
             event: event,
+            result: event.content,
+          ),
+        );
+        add(OnHaveResult());
+      },
+    );
+
+    on<OnHaveResult>(
+      (event, emit) {
+        emit(
+          state.copyWith(
+            event: event,
           ),
         );
         add(OnInit());
@@ -106,8 +118,11 @@ class SearchButtonBloc extends Bloc<SearchButtonEvent, SearchButtonState> {
   }
 
   void _generatePrompt() {
-    final String prompt =
-        '${'prompt.basicPrompt'.tr()} ${'prompt.top'.tr()} ${state.numOfRank} ${state.dataToSearch!.toLowerCase()} ${'prompt.in'.tr()} ${state.location ?? 'home.inTheWorld'.tr()}';
+    final String prompt = 'prompt.basicPrompt'.tr(namedArgs: {
+      'number': '${state.numOfRank}',
+      'data': '${state.dataToSearch}'
+    });
+
     add(OnSetPrompt(prompt));
   }
 
@@ -116,7 +131,7 @@ class SearchButtonBloc extends Bloc<SearchButtonEvent, SearchButtonState> {
     result.fold(
       (failure) => add(OnError()),
       (success) {
-        add(OnDone());
+        add(OnDone(success.choices.first.message.content));
       },
     );
   }

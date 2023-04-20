@@ -1,17 +1,14 @@
 {
-    "home":{
+    "home" : {
         "top" : "TOP",
-        "inTheWorld" : "the World",
+        "inBarcelona" : "In Barcelona",
         "search" : "Search",
         "loading" : "Loading...",
         "popup" : {
-            "title" : "wating for GPT",
-            "message" : "Espere por favor..."
+            "title" : "Waiting for GPT",
+            "message" : "Please wait..."
         }
     },
     "prompt" : {
-        "top" : "Top",
-        "in" : "in",
-        "basicPrompt": "I want you to act as a ranking table. In this table, the ranking winners will be displayed, starting from the 1st place to the last requested. For example: I will ask you for the top 10 bars in Madrid. And you will provide them in the following manner: name: NAME OF THE BAR, hen you will make a line break and continue with info: A BRIEF DESCRIPTION OF THE BAR."
-    }
+        "basicPrompt": "Act as a ranking table that a tourist guide would provide. I will ask you for a ranking of different things, and you should give me, in addition to the names of the ranking winners, a brief piece of information about each one. The format should be WINNER NAME: INFORMATION. Tell me the top {number} of the best {data} in Barcelona"    }
 }

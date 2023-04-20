@@ -5,10 +5,9 @@ import 'package:ai_data/core/app/storage/share_preferences.dart';
 import 'package:ai_data/features/home/data/repository/gpt_api.dart';
 import 'package:ai_data/features/home/data/repository/gpt_repository.dart';
 import 'package:ai_data/features/home/screen/bloc/data_to_search/data_to_search_bloc.dart';
-import 'package:ai_data/features/home/screen/bloc/languages_bloc/languages_bloc.dart';
-import 'package:ai_data/features/home/screen/bloc/location_section/location_section_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/rank_dropdown/dropdown_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/search_button/search_button_bloc.dart';
+import 'package:ai_data/features/ranking/bloc/ranking_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,14 +49,6 @@ void _registerRepository() {
 
 //BLoC
 void _registerBloc() {
-  locator.registerLazySingleton<LocationSectionBloc>(
-    () => LocationSectionBloc(),
-  );
-
-  locator.registerLazySingleton<LanguagesBloc>(
-    () => LanguagesBloc(),
-  );
-
   locator.registerLazySingleton<DropdownBloc>(
     () => DropdownBloc(),
   );
@@ -72,5 +63,9 @@ void _registerBloc() {
     () => SearchButtonBloc(
       gptRepository: locator<GptRepository>(),
     ),
+  );
+
+  locator.registerFactory<RankingBloc>(
+    () => RankingBloc(),
   );
 }
