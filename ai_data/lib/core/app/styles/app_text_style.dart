@@ -7,55 +7,55 @@ class AppTextStyle {
   ///
   /// NEW TEXTSTYLES
   ///
-  static final brandStyle = GoogleFonts.satisfy(
-    fontSize: AppFontSize.xxl,
-    color: AppColors.brandPrimary,
+  static final brandStyle = GoogleFonts.orbitron(
+    fontSize: AppFontSize.xl,
+    color: AppColors.naturalGrey,
     fontWeight: FontWeight.bold,
   );
 
-  static final titleStyle = GoogleFonts.satisfy(
+  static final titleStyle = GoogleFonts.orbitron(
     fontSize: AppFontSize.l,
-    color: AppColors.brandPrimary,
+    color: AppColors.naturalGrey,
     fontWeight: FontWeight.bold,
   );
-  static final simpleTextBold = GoogleFonts.dosis(
+  static final simpleTextBold = GoogleFonts.orbitron(
     fontSize: AppFontSize.l,
-    color: AppColors.brandPrimary,
+    color: AppColors.naturalGrey,
     fontWeight: FontWeight.bold,
   );
 
-  static final simpleText = GoogleFonts.dosis(
+  static final simpleText = GoogleFonts.orbitron(
     fontSize: AppFontSize.l,
-    color: AppColors.brandPrimary,
+    color: AppColors.naturalGrey,
     fontWeight: FontWeight.normal,
   );
 
-  static final detailTextNormal = GoogleFonts.dosis(
+  static final detailTextNormal = GoogleFonts.orbitron(
     fontSize: AppFontSize.m,
-    color: AppColors.brandPrimary,
+    color: AppColors.naturalGrey,
     fontWeight: FontWeight.normal,
   );
 
-  static final detailText500 = GoogleFonts.dosis(
+  static final detailText500 = GoogleFonts.orbitron(
     fontSize: AppFontSize.m,
-    color: AppColors.brandPrimary,
+    color: AppColors.naturalGrey,
     fontWeight: FontWeight.w500,
   );
 
-  static final detailTextBold = GoogleFonts.dosis(
+  static final detailTextBold = GoogleFonts.orbitron(
     fontSize: AppFontSize.m,
-    color: AppColors.brandPrimary,
+    color: AppColors.naturalGrey,
     fontWeight: FontWeight.bold,
   );
-  static final importantTextNormal = GoogleFonts.montserrat(
+  static final importantTextNormal = GoogleFonts.orbitron(
     fontSize: 18,
-    color: AppColors.brandPrimary,
+    color: AppColors.naturalGrey,
     fontWeight: FontWeight.normal,
   );
 
-  static final importantText500 = GoogleFonts.montserrat(
+  static final importantText500 = GoogleFonts.orbitron(
     fontSize: 18,
-    color: AppColors.brandPrimary,
+    color: AppColors.naturalGrey,
     fontWeight: FontWeight.w500,
   );
 }

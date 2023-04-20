@@ -12,4 +12,6 @@ class Constants {
   //Blur
   static const double blurInObject = 20;
   static const double lowBlur = 2;
+
+  static const List<int> rankingNum = [3, 5, 10];
 }

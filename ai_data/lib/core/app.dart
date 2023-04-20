@@ -1,5 +1,9 @@
+import 'package:ai_data/core/app/service_locator/service_locator.dart';
+import 'package:ai_data/core/app/storage/local_storage.dart';
+import 'package:ai_data/core/app/styles/app_themes.dart';
 import 'package:ai_data/core/app/utils/life_cycle_manager.dart';
 import 'package:ai_data/core/routing/app_routing.dart';
+import 'package:ai_data/features/home/screen/bloc/languages_bloc/languages_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +14,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [],
+      providers: [
+        BlocProvider(
+          create: (context) => locator<LanguagesBloc>()
+            ..setLanguage(
+              locator<LocalStorageService>().getLocale().toUpperCase(),
+            ),
+        ),
+      ],
       child: const LifeCycleManager(
         child: AppWithTheme(),
       ),
@@ -41,6 +52,7 @@ class _AppWithThemeState extends State<AppWithTheme> {
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
         child: child ?? Container(),
       ),
+      theme: appThemeData,
       routeInformationParser: goRouter.routeInformationParser,
       routeInformationProvider: goRouter.routeInformationProvider,
       routerDelegate: goRouter.routerDelegate,

@@ -1,10 +1,13 @@
 import 'package:ai_data/core/app/constants/endpoints.dart';
 import 'package:ai_data/core/app/http_service/http_service.dart';
+import 'package:ai_data/core/app/storage/local_storage.dart';
 import 'package:ai_data/core/app/storage/share_preferences.dart';
+import 'package:ai_data/features/home/screen/bloc/data_to_search/data_to_search_bloc.dart';
+import 'package:ai_data/features/home/screen/bloc/languages_bloc/languages_bloc.dart';
+import 'package:ai_data/features/home/screen/bloc/rank_dropdown/dropdown_bloc.dart';
+import 'package:ai_data/features/home/screen/bloc/search_button/search_button_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../storage/local_storage.dart';
 
 final locator = GetIt.instance;
 const useMocks = false;
@@ -37,4 +40,19 @@ Future<void> _registerCore(String package) async {
 void _registerRepository() {}
 
 //BLoC
-void _registerBloc() {}
+void _registerBloc() {
+  locator.registerLazySingleton<LanguagesBloc>(
+    () => LanguagesBloc(),
+  );
+  locator.registerLazySingleton<DropdownBloc>(
+    () => DropdownBloc(),
+  );
+  locator.registerLazySingleton<DataToSearchBloc>(
+    () => DataToSearchBloc(
+      dropdownBloc: locator<DropdownBloc>(),
+    ),
+  );
+  locator.registerLazySingleton<SearchButtonBloc>(
+    () => SearchButtonBloc(),
+  );
+}

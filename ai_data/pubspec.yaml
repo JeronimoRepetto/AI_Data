@@ -30,19 +30,9 @@ dependencies:
 
   #Login
   network_info_plus:
-  #Firebase
-  firebase_auth:
-  cloud_firestore: 
-  firebase_core: ^2.9.0
-  firebase_messaging: 
   
   # GOOGLE
   google_fonts: 4.0.3
-  google_sign_in: 
-
-
-  #APPLE
-  sign_in_with_apple:
 
   #Lang
   easy_localization:
@@ -102,4 +92,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  #assets:
+  assets:
+  - lang/
+  - assets/gpt/
+  - assets/countries_flags/
