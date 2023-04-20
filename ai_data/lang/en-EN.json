@@ -1,8 +1,17 @@
 {
     "home":{
         "top" : "TOP",
-        "inTheWorld" : "In the World",
+        "inTheWorld" : "the World",
         "search" : "Search",
-        "loading" : "Loading..."
+        "loading" : "Loading...",
+        "popup" : {
+            "title" : "wating for GPT",
+            "message" : "Espere por favor..."
+        }
+    },
+    "prompt" : {
+        "top" : "Top",
+        "in" : "in",
+        "basicPrompt": "I want you to act as a ranking table. In this table, the ranking winners will be displayed, starting from the 1st place to the last requested. For example: I will ask you for the top 10 bars in Madrid. And you will provide them in the following manner: name: NAME OF THE BAR, hen you will make a line break and continue with info: A BRIEF DESCRIPTION OF THE BAR."
     }
 }

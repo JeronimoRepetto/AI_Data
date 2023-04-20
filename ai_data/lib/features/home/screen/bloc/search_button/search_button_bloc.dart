@@ -1,3 +1,5 @@
+import 'package:ai_data/features/home/data/repository/gpt_repository.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,7 +7,11 @@ part 'search_button_event.dart';
 part 'search_button_state.dart';
 
 class SearchButtonBloc extends Bloc<SearchButtonEvent, SearchButtonState> {
-  SearchButtonBloc() : super(const SearchButtonState()) {
+  final GptRepository _gptRepository;
+  SearchButtonBloc({
+    required GptRepository gptRepository,
+  })  : _gptRepository = gptRepository,
+        super(const SearchButtonState()) {
     on<OnInit>(
       (event, emit) => emit(
         state.copyWith(
@@ -48,13 +54,25 @@ class SearchButtonBloc extends Bloc<SearchButtonEvent, SearchButtonState> {
         ),
       ),
     );
-    on<OnConnectWithGPT>(
-      (event, emit) => emit(
+
+    on<OnConnectWithGPT>((event, emit) {
+      emit(
         state.copyWith(
           event: event,
         ),
-      ),
-    );
+      );
+      _getChatGPTResult();
+    });
+
+    on<OnSetPrompt>((event, emit) {
+      emit(
+        state.copyWith(
+          prompt: event.prompt,
+          event: event,
+        ),
+      );
+      add(OnConnectWithGPT());
+    });
 
     on<OnDone>(
       (event, emit) {
@@ -66,6 +84,14 @@ class SearchButtonBloc extends Bloc<SearchButtonEvent, SearchButtonState> {
         add(OnInit());
       },
     );
+
+    on<OnError>(
+      (event, emit) => emit(
+        state.copyWith(
+          event: event,
+        ),
+      ),
+    );
   }
 
   void init() => add(OnInit());
@@ -75,13 +101,23 @@ class SearchButtonBloc extends Bloc<SearchButtonEvent, SearchButtonState> {
   void setDataToSearch(String? dataToSearch) =>
       add(OnChangeDataToSearch(dataToSearch));
 
-  Future<void> searchPrompt() async {
-    add(OnConnectWithGPT());
-    await Future.delayed(
-      Duration(
-        seconds: 3,
-      ),
+  void searchPrompt() {
+    _generatePrompt();
+  }
+
+  void _generatePrompt() {
+    final String prompt =
+        '${'prompt.basicPrompt'.tr()} ${'prompt.top'.tr()} ${state.numOfRank} ${state.dataToSearch!.toLowerCase()} ${'prompt.in'.tr()} ${state.location ?? 'home.inTheWorld'.tr()}';
+    add(OnSetPrompt(prompt));
+  }
+
+  Future<void> _getChatGPTResult() async {
+    final result = await _gptRepository.getRanking(state.prompt!);
+    result.fold(
+      (failure) => add(OnError()),
+      (success) {
+        add(OnDone());
+      },
     );
-    add(OnDone());
   }
 }

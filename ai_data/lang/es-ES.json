@@ -1,8 +1,17 @@
 {
     "home":{
         "top" : "TOP",
-        "inTheWorld" : "En el Mundo",
+        "inTheWorld" : "el Mundo",
         "search" : "Buscar",
-        "loading" : "Cargando..."
+        "loading" : "Cargando...",
+        "popup" : {
+            "title" : "Esperando a GPT",
+            "message" : "Espere por favor..."
+        } 
+    },
+    "prompt" : {
+        "top" : "Top",
+        "in" : "en",
+        "basicPrompt": "Quiero que actues como una tabla de rankings. En esta tabla se veran los ganadores del ranking. iniciando desde el 1mer puesto hasta el ultimo que se solicite. EJ: Te pedire los 10 mejores bares en Madrid. Y me los daras de la siguiente manera: name: NOMBRE DEL BAR, luego haras un salto de linea y continuaras con info: UNA BREVE DESCRIPCION DEL BAR."
     }
 }

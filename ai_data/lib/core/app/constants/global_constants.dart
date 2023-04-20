@@ -4,7 +4,7 @@ class Constants {
   static const Duration timeToCache = Duration(days: 1);
   static const hitCacheOnError = [401, 404, 500];
   static const int totalRetry = 3;
-  static const int secondsTimeOut = 1;
+  static const int secondsTimeOut = 5;
   static const Duration retryDelay = Duration(
     seconds: secondsTimeOut + secondsTimeOut,
   );
@@ -14,4 +14,5 @@ class Constants {
   static const double lowBlur = 2;
 
   static const List<int> rankingNum = [3, 5, 10];
+  static const double heightPopup = 300;
 }

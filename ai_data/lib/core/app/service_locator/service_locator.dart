@@ -2,6 +2,8 @@ import 'package:ai_data/core/app/constants/endpoints.dart';
 import 'package:ai_data/core/app/http_service/http_service.dart';
 import 'package:ai_data/core/app/storage/local_storage.dart';
 import 'package:ai_data/core/app/storage/share_preferences.dart';
+import 'package:ai_data/features/home/data/repository/gpt_api.dart';
+import 'package:ai_data/features/home/data/repository/gpt_repository.dart';
 import 'package:ai_data/features/home/screen/bloc/data_to_search/data_to_search_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/languages_bloc/languages_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/location_section/location_section_bloc.dart';
@@ -38,7 +40,13 @@ Future<void> _registerCore(String package) async {
 }
 
 //Repositories
-void _registerRepository() {}
+void _registerRepository() {
+  locator.registerLazySingleton<GptRepository>(
+    () => GptApi(
+      httpService: locator<HttpService>(),
+    ),
+  );
+}
 
 //BLoC
 void _registerBloc() {
@@ -61,6 +69,8 @@ void _registerBloc() {
   );
 
   locator.registerLazySingleton<SearchButtonBloc>(
-    () => SearchButtonBloc(),
+    () => SearchButtonBloc(
+      gptRepository: locator<GptRepository>(),
+    ),
   );
 }

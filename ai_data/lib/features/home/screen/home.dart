@@ -12,6 +12,7 @@ import 'package:ai_data/features/home/screen/bloc/languages_bloc/languages_bloc.
 import 'package:ai_data/features/home/screen/bloc/location_section/location_section_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/rank_dropdown/dropdown_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/search_button/search_button_bloc.dart';
+import 'package:ai_data/widgets/custom_alert_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,10 +47,30 @@ class HomeScreen extends StatelessWidget {
         body: BlocListener<SearchButtonBloc, SearchButtonState>(
           listener: (context, state) {
             switch (state.event.runtimeType) {
-              case OnDone:
-                goRouter.pushNamed('ranking');
-                break;
               case OnConnectWithGPT:
+                showDialog(
+                  useSafeArea: true,
+                  context: context,
+                  builder: (context) => CustomAlertDialog(
+                    title: 'home.popup.title'.tr(),
+                    titleStyle: AppTextStyle.simpleTextBold.copyWith(
+                      color: AppColors.secondaryGradient,
+                    ),
+                    content: 'home.popup.message'.tr(),
+                    contentStyle: AppTextStyle.detailTextNormal,
+                    imageSrc: 'assets/gpt/gpt-logo.png',
+                    imgColor: AppColors.primary,
+                    useOnWillPop: false,
+                  ),
+                );
+                break;
+              case OnDone:
+                Navigator.pop(context);
+                //goRouter.pushNamed('ranking');
+                break;
+              case OnError:
+                Navigator.pop(context);
+
                 break;
               default:
                 break;

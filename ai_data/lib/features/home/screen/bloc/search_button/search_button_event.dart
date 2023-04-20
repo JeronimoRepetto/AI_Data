@@ -21,4 +21,11 @@ class OnCheckForm extends SearchButtonEvent {}
 
 class OnConnectWithGPT extends SearchButtonEvent {}
 
+class OnSetPrompt extends SearchButtonEvent {
+  final String prompt;
+  OnSetPrompt(this.prompt);
+}
+
 class OnDone extends SearchButtonEvent {}
+
+class OnError extends SearchButtonEvent {}
