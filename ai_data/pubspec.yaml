@@ -1,0 +1,105 @@
+name: ai_data
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.0.1+1
+
+environment:
+  sdk: '>=2.19.0 <3.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_local_notifications:  
+  cupertino_icons: ^1.0.2  
+  get_it:
+  go_router:
+  formz:
+  carousel_slider:
+  dartz:
+  package_info_plus:
+
+  #Animations
+  animations:
+  animate_do:
+
+  #Login
+  network_info_plus:
+  #Firebase
+  firebase_auth:
+  cloud_firestore: 
+  firebase_core: ^2.9.0
+  firebase_messaging: 
+  
+  # GOOGLE
+  google_fonts: 4.0.3
+  google_sign_in: 
+
+
+  #APPLE
+  sign_in_with_apple:
+
+  #Lang
+  easy_localization:
+  
+  #BLoC
+  flutter_bloc: 8.1.1
+  equatable:
+
+  #Storage
+  shared_preferences:
+
+  #Dio
+  dio: 
+    git:
+      url: https://github.com/JeronimoRepetto/dio.git
+      path: dio  
+  dio_smart_retry: 
+      git:
+        url: https://github.com/JeronimoRepetto/dio_smart_retry.git
+  dio_cache_interceptor: 
+    git:
+      url: https://github.com/JeronimoRepetto/dio_cache_interceptor.git
+      path: dio_cache_interceptor
+  dio_cache_interceptor_hive_store: 
+    git:
+      url: https://github.com/JeronimoRepetto/dio_cache_interceptor.git
+      path: dio_cache_interceptor_hive_store
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: 2.0.1
+
+#flutter_icons:
+#  #https://dev.to/stack-labs/flutter-flavors-launcher-icons-made-simple-336j
+#  android: true
+#  ios: true
+#  remove_alpha_ios: true
+#  image_path_ios: "assets/images/icons/ios_icon.png"
+#  image_path_android: "assets/images/icons/ios_icon.png"
+#  adaptive_icon_background: "assets/android_adaptive_icon/background.png"
+#  adaptive_icon_foreground: "assets/android_adaptive_icon/foreground.png"
+#
+#flutter_native_splash:
+#  android: true
+#  ios: true
+#  background_image: "assets/images/splash_screen/background_splash.png"
+#  image: "assets/images/splash_screen/splash_logo.png"
+#  background_image_dark: "assets/images/splash_screen/background_splash.png"
+#  image_dark: "assets/images/splash_screen/splash_logo.png"
+#  android_gravity: center_horizontal
+#  ios_content_mode: scaleAspectFit
+#
+#  android_12:
+#    image: "assets/images/splash_screen/splash_logo.png"
+#    image_dark: "assets/images/splash_screen/splash_logo.png"
+
+flutter:
+  uses-material-design: true
+  #assets:
