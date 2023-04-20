@@ -1,25 +1,28 @@
 import 'package:ai_data/features/home/screen/home.dart';
-import 'package:flutter/material.dart';
+import 'package:ai_data/features/ranking/screen/ranking.dart';
 import 'package:go_router/go_router.dart';
 
 enum AppRoute {
   home,
-  signIn,
-  poem,
+  ranking,
 }
 
-final List<String> routesWithoutAuth = [
-  '/',
-];
+final List<String> routesWithoutAuth = ['/', 'ranking'];
 
 final GoRouter goRouter = GoRouter(
   debugLogDiagnostics: true,
   routes: [
     GoRoute(
-      path: '/',
-      name: AppRoute.home.name,
-      builder: (context, state) => HomeScreen(),
-    ),
+        path: '/',
+        name: AppRoute.home.name,
+        builder: (context, state) => const HomeScreen(),
+        routes: [
+          GoRoute(
+            path: AppRoute.ranking.name,
+            name: AppRoute.ranking.name,
+            builder: (context, state) => Ranking(),
+          )
+        ]),
   ],
 );
 

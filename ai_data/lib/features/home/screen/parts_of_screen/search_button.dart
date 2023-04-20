@@ -33,7 +33,7 @@ class _SearchButton extends StatelessWidget {
                           MaterialStateProperty.resolveWith<Color?>(
                         (Set<MaterialState> states) {
                           if (states.contains(MaterialState.disabled)) {
-                            return AppColors.naturalGrey;
+                            return AppColors.neutralLightBack;
                           }
                           return AppColors.primary;
                         },
@@ -41,31 +41,40 @@ class _SearchButton extends StatelessWidget {
                     ),
                     onPressed: state.disabled
                         ? null
-                        : () => searchButtonBloc.searchPrompt,
+                        : () {
+                            searchButtonBloc.searchPrompt();
+                          },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: AppSpaces.xl,
                           width: AppSpaces.xl,
                           child: Image(
-                            image: AssetImage(
+                            image: const AssetImage(
                               'assets/gpt/gpt-logo.png',
                             ),
-                            color: AppColors.naturalGrey,
+                            color: state.disabled
+                                ? AppColors.neutralLightBack
+                                : AppColors.naturalGrey,
                           ),
                         ),
                         Text(
                           'home.search'.tr(),
+                          style: AppTextStyle.detailText500.copyWith(
+                            color: AppColors.naturalGrey,
+                          ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: AppSpaces.xl,
                           width: AppSpaces.xl,
                           child: Image(
-                            image: AssetImage(
+                            image: const AssetImage(
                               'assets/gpt/gpt-logo.png',
                             ),
-                            color: AppColors.naturalGrey,
+                            color: state.disabled
+                                ? AppColors.neutralLightBack
+                                : AppColors.naturalGrey,
                           ),
                         ),
                       ],

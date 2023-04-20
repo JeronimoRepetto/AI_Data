@@ -6,8 +6,10 @@ import 'package:ai_data/core/app/styles/app_gradients.dart';
 import 'package:ai_data/core/app/styles/app_space.dart';
 import 'package:ai_data/core/app/styles/app_text_style.dart';
 import 'package:ai_data/core/lang/l10n.dart';
+import 'package:ai_data/core/routing/app_routing.dart';
 import 'package:ai_data/features/home/screen/bloc/data_to_search/data_to_search_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/languages_bloc/languages_bloc.dart';
+import 'package:ai_data/features/home/screen/bloc/location_section/location_section_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/rank_dropdown/dropdown_bloc.dart';
 import 'package:ai_data/features/home/screen/bloc/search_button/search_button_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -18,6 +20,7 @@ part 'parts_of_screen/rank_dropdown.dart';
 part 'parts_of_screen/data_to_search.dart';
 part 'parts_of_screen/language_section.dart';
 part 'parts_of_screen/search_button.dart';
+part 'parts_of_screen/location_section.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -33,16 +36,32 @@ class HomeScreen extends StatelessWidget {
           create: (context) => locator<DataToSearchBloc>(),
         ),
         BlocProvider(
-          create: (context) => locator<SearchButtonBloc>(),
+          create: (context) => locator<SearchButtonBloc>()..init(),
+        ),
+        BlocProvider(
+          create: (context) => locator<LocationSectionBloc>(),
         ),
       ],
       child: Scaffold(
-        body: Stack(
-          children: [
-            const _HomeForm(),
-            _LanguageSection(),
-            _SearchButton(),
-          ],
+        body: BlocListener<SearchButtonBloc, SearchButtonState>(
+          listener: (context, state) {
+            switch (state.event.runtimeType) {
+              case OnDone:
+                goRouter.pushNamed('ranking');
+                break;
+              case OnConnectWithGPT:
+                break;
+              default:
+                break;
+            }
+          },
+          child: Stack(
+            children: [
+              const _HomeForm(),
+              _LanguageSection(),
+              _SearchButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -70,9 +89,9 @@ class _HomeForm extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              _TopAndNumberSection(),
-              _DataToSearchSection(),
+            children: [
+              const _TopAndNumberSection(),
+              _DataToSearch(),
               _LocationSection()
             ],
           ),
@@ -100,51 +119,6 @@ class _TopAndNumberSection extends StatelessWidget {
           width: AppSpaces.m,
         ),
         const _RankDropdown(),
-      ],
-    );
-  }
-}
-
-class _DataToSearchSection extends StatelessWidget {
-  const _DataToSearchSection({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return _DataToSearch();
-  }
-}
-
-class _LocationSection extends StatelessWidget {
-  const _LocationSection({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text('home.inTheWorld'.tr(), style: AppTextStyle.brandStyle),
-        Container(
-          height: AppSpaces.xxl,
-          width: AppFontSize.xxl,
-          decoration: const BoxDecoration(
-            color: AppColors.naturalGrey,
-            shape: BoxShape.circle,
-          ),
-          child: IconButton(
-            onPressed: () {
-              //TODO OPEN MAP
-            },
-            icon: const Icon(
-              Icons.map_outlined,
-              color: AppColors.darkGrey,
-            ),
-          ),
-        ),
-        const SizedBox.shrink(),
       ],
     );
   }

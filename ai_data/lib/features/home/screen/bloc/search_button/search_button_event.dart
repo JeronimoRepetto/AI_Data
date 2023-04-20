@@ -5,6 +5,8 @@ abstract class SearchButtonEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class OnInit extends SearchButtonEvent {}
+
 class OnChangeRankNum extends SearchButtonEvent {
   final int? numOfRank;
   OnChangeRankNum(this.numOfRank);
@@ -16,3 +18,7 @@ class OnChangeDataToSearch extends SearchButtonEvent {
 }
 
 class OnCheckForm extends SearchButtonEvent {}
+
+class OnConnectWithGPT extends SearchButtonEvent {}
+
+class OnDone extends SearchButtonEvent {}
